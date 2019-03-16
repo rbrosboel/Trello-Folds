@@ -337,13 +337,14 @@ const tfolds = (function (factory) {
             boardId = tdom.getBoardIdFromUrl();
 
             chrome.storage.sync.get(["settings", boardId], result => {
-                if (config.debug) {
-                    console.table(result.settings);
-                    if (result.settings["rememberViewStates"] === true) {
-                        console.table(result[boardId]);
-                    }
-                }
                 if (result["settings"]) {
+                    if (config.debug) {
+                        console.table(result.settings);
+                        if (result.settings["rememberViewStates"] === true) {
+                            console.table(result[boardId]);
+                        }
+                    }
+
                     // eslint-disable-next-line prefer-destructuring
                     settings = result["settings"];
                 }
