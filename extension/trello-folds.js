@@ -1077,6 +1077,11 @@ const tfolds = (function (factory) {
          *
          */
         formatAsSection($card) {
+            // Skip if section is already formatted
+            if ($card.find('#section-title').length) {
+                return;
+            }
+
             const $icon = $('<span class="icon-expanded"/>');
             $icon.click(function () {
                 tfolds.toggleSection(this);
