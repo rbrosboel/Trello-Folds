@@ -398,7 +398,7 @@ const tdom = (function (factory) {
             if (!el) {
                 throw new TypeError("Parameter [el] undefined");
             }
-            let nameElement = $(el).find("h2.list-header-name-assist");
+            let nameElement = $(el).find("h2.list-header-name-assist, .list-collapsed .list-header-name");
             if (nameElement.length === 0) {
                 console.error("No [H2.list-header-name-assist] found", el);
                 throw new ReferenceError("No [H2.list-header-name-assist] tag found");
