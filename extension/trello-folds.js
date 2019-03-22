@@ -1158,7 +1158,12 @@ const tfolds = (function (factory) {
             let $s = $(section);
             $s.toggleClass("icon-collapsed icon-expanded");
             let $cards = $s.closest("a").nextUntil(`a:contains('${self.sectionIdentifier}'),div.card-composer`);
-            $cards.toggle();
+
+            if ($s.hasClass("icon-collapsed")) {
+                $cards.hide();
+            } else {
+                $cards.show();
+            }
 
             // const listName = tdom.getListName(tdom.getContainingList(section));
             const $l = $(tdom.getContainingList(section));
