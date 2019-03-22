@@ -9,6 +9,22 @@ const tdom = (function (factory) {
 }(function ($) {
     'use strict';
 
+    function debounce(func, wait, immediate) {
+        let timeout;
+        return function() {
+            const context = this
+            const args = arguments;
+            const later = function() {
+                timeout = null;
+                if (!immediate) func.apply(context, args);
+            };
+            const callNow = immediate && !timeout;
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+            if (callNow) func.apply(context, args);
+        };
+    };
+
     class EventHandler {
 
         constructor() {
@@ -273,6 +289,9 @@ const tdom = (function (factory) {
                     } else if ($(m.target).hasClass("list-header-name-assist") && m.addedNodes.length === 1) {
                         handler.emit(EventHandler.LIST_TITLE_MODIFIED, $(m.target).closest("div.list"),
                             m.addedNodes[0].textContent);
+                    } else if (m.addedNodes.length > 0 && $(m.addedNodes[0]).hasClass("list-card-cover")) {
+                        // Hack: Trello modifies cards when loading card covers - trigger reinitialization
+                        handler.emit(EventHandler.BOARD_CHANGED, self.boardId, self.boardId);
                     }
                 });
             });
@@ -298,7 +317,7 @@ const tdom = (function (factory) {
          *
          */
         onBoardChanged(callback) {
-            handler.addListener(EventHandler.BOARD_CHANGED, callback);
+            handler.addListener(EventHandler.BOARD_CHANGED, debounce(callback, 100));
         },
 
         /**
