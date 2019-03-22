@@ -398,6 +398,10 @@ const tfolds = (function (factory) {
          * Adds board wide buttons to the top bar.
          */
         addBoardIcons() {
+            if ($("#toggle-compact-mode").length) {
+                return;
+            }
+
             $("div.header-user").prepend(`<a id='toggle-compact-mode' class='header-btn compact-mode-disabled'>
                                                 <span class='header-btn-text'>Compact Mode</span></a>`);
             $("a#toggle-compact-mode").click(function() {
