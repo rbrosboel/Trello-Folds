@@ -461,7 +461,9 @@ const tfolds = (function (factory) {
                         const cardName = tdom.getCardName($(this));
                         if (sectionStates[self.getStrippedTitle(cardName)] === true) {
                             let $section = $(this).find(".icon-expanded");
-                            self.toggleSection($section[0]);
+                            if ($section.length) {
+                                self.toggleSection($section[0]);
+                            }
                         }
                     });
                 });
