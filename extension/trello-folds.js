@@ -408,6 +408,12 @@ const tfolds = (function (factory) {
                 compactMode = !compactMode;
                 self.setCompactMode(compactMode);
             });
+
+            $("div.header-user").prepend(`<a id='trigger-refresh' class='header-btn compact-mode-disabled'>
+                                                <span class='header-btn-text'>Refresh UI</span></a>`);
+            $("a#trigger-refresh").click(function() {
+                self.setupBoard();
+            });
         },
 
         /**
