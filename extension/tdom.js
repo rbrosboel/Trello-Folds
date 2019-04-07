@@ -517,7 +517,7 @@ const tdom = (function (factory) {
             if (!name) {
                 throw new TypeError();
             }
-            let jCards = $(list).find("a.list-card").filter(function () {
+            let jCards = $(list).find("a.list-card").not(".placeholder").filter(function () {
                 let title = self.getCardName($(this));
                 return title.indexOf(name) !== -1;
             });
@@ -534,7 +534,7 @@ const tdom = (function (factory) {
             if (name === undefined) {
                 throw new TypeError();
             }
-            let jCards = $("a.list-card").filter(function () {
+            let jCards = $("a.list-card").not(".placeholder").filter(function () {
                 let title = self.getCardName($(this));
                 if (exactMatch) {
                     return title === name;
@@ -555,7 +555,7 @@ const tdom = (function (factory) {
          * @returns {Number} Number of cards found
          */
         countCards(list, filter) {
-            let $cards = $(list).find("a.list-card").filter(function () {
+            let $cards = $(list).find("a.list-card").not(".placeholder").filter(function () {
                 const title = self.getCardName($(this));
                 if (filter && title) {
                     return !self.containsAny(title, filter);
