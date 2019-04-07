@@ -125,6 +125,19 @@
     top: -1px;
 }
 
+.section-count-badge {
+    padding: 1px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 5px;
+    background-color: rgb(151, 151, 151);
+    color: white;
+    font-size: 9pt;
+    margin-left: 5px;
+    position: relative;
+    top: 4px;
+}
+
 .collapsed-limit-exceeded {
     border-right: solid 10px #b04632;
 }

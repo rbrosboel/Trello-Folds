@@ -150,6 +150,7 @@ const tfolds = (function (factory) {
                 return;
             }
             self.showWipLimit(listEl);
+            self.showSectionCount(listEl);
         },
 
         /**
@@ -163,6 +164,7 @@ const tfolds = (function (factory) {
             self.addFoldingButton(listEl);
             self.addCollapsedList(listEl);
             self.showWipLimit($(listEl).find(".js-list-content")[0]);
+            self.showSectionCount(listEl);
         },
 
         listDragged(listEl) {
@@ -231,7 +233,9 @@ const tfolds = (function (factory) {
                 }
             }
 
-            self.showWipLimit(tdom.getContainingList(cardEl));
+            let list = tdom.getContainingList(cardEl);
+            self.showWipLimit(list);
+            self.showSectionCount(list);
         },
 
         /**
@@ -276,6 +280,7 @@ const tfolds = (function (factory) {
         removeSectionFormatting($card) {
             $card.find("span.icon-expanded,span.icon-collapsed").remove();
             $card.find("span#section-title").remove();
+            $card.find("span.section-count-badge").remove();
             $card.find("span.list-card-title").show();
             $card.removeClass("section-card");
         },
@@ -561,6 +566,7 @@ const tfolds = (function (factory) {
             self.combineLists();
             self.makeListsFoldable();
             self.addWipLimits();
+            self.showSectionCountAllLists();
         },
 
         //#region COMBINED LISTS
@@ -1037,6 +1043,24 @@ const tfolds = (function (factory) {
             $header.find("textarea").show();
         },
 
+        showSectionCountAllLists() {
+            let $lists = tdom.getLists();
+            $lists.each((i, list) => {
+                self.showSectionCount(list);
+            });
+        },
+
+        showSectionCount(listEl) {
+            requestAnimationFrame(() => {
+                let $sections = tdom.getCardsInList(listEl, self.sectionIdentifier);
+                $sections.map((i, section) => {
+                    let $section = $(section)
+                    let $cards = $section.closest("a").nextUntil(`a:contains('${self.sectionIdentifier}'),div.card-composer`).not('.placeholder');
+                    $section.find('.section-count-badge').text($cards.length)
+                });
+            });
+        },
+
         /**
          *
          */
@@ -1100,6 +1124,7 @@ const tfolds = (function (factory) {
                 return false;
             });
             const strippedTitle = self.getStrippedTitle(tdom.getCardName($card));
+            $card.prepend(`<span class="section-count-badge"/>`);
             $card.prepend(`<span id="section-title">${strippedTitle}</span>`);
             $card.prepend($icon);
             $card.find('span.list-card-title').hide();
