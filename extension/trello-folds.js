@@ -1123,6 +1123,17 @@ const tfolds = (function (factory) {
                 tfolds.toggleSection(this);
                 return false;
             });
+            $icon.contextmenu(function () {
+                let collapse = $(this).hasClass("icon-expanded")
+                let $sections = tdom.getCardsByName(tdom.getCardName($card));
+                $sections.each((i, section) => {
+                    let $icon = $(section).find(".icon-expanded, .icon-collapsed")
+                    if ($icon.hasClass(collapse ? 'icon-expanded' : 'icon-collapsed')) {
+                        tfolds.toggleSection($icon.get(0));
+                    }
+                })
+                return false;
+            });
             const strippedTitle = self.getStrippedTitle(tdom.getCardName($card));
             $card.prepend(`<span class="section-count-badge"/>`);
             $card.prepend(`<span id="section-title">${strippedTitle}</span>`);
