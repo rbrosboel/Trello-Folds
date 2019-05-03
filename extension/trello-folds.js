@@ -1220,9 +1220,9 @@ const tfolds = (function (factory) {
             let $cards = $s.closest("a").nextUntil(`a:contains('${self.sectionIdentifier}'),div.card-composer`);
 
             if ($s.hasClass("icon-collapsed")) {
-                $cards.hide();
+                $cards.addClass('card-hide');
             } else {
-                $cards.show();
+                $cards.removeClass('card-hide');
             }
 
             // const listName = tdom.getListName(tdom.getContainingList(section));

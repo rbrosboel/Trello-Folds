@@ -159,6 +159,10 @@
     min-height: 29px;
 }
 
+.list-card.card-hide {
+    display: none;
+}
+
 span#section-title {
     margin-left: 5px;
     position: relative;
