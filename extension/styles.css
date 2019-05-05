@@ -165,6 +165,10 @@ span#section-title {
     top: 5px;
 }
 
+#board .list-card.active-card {
+    background-color: #ffffc0;
+}
+
 .header-btn.compact-mode-enabled {
     background-color: #539744;
 }
