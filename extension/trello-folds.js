@@ -28,6 +28,7 @@ const tfolds = (function (factory) {
     };
 
     let compactMode = false;
+    let disableCoverMode = true;
 
     let storage = {};
     let boardId;
@@ -397,6 +398,9 @@ const tfolds = (function (factory) {
 
             compactMode = self.retrieveGlobalBoardSetting("compactMode");
             self.setCompactMode(compactMode);
+
+            disableCoverMode = self.retrieveGlobalBoardSetting("disableCoverMode");
+            self.setDisableCoverMode(disableCoverMode);
         },
 
         /**
@@ -407,17 +411,24 @@ const tfolds = (function (factory) {
                 return;
             }
 
+            $("div.header-user").prepend(`<a id='trigger-refresh' class='header-btn'>
+                                                <span class='header-btn-text'>Refresh UI</span></a>`);
+            $("a#trigger-refresh").click(function() {
+                self.setupBoard();
+            });
+
             $("div.header-user").prepend(`<a id='toggle-compact-mode' class='header-btn compact-mode-disabled'>
-                                                <span class='header-btn-text'>Compact Mode</span></a>`);
+                                                <span class='header-btn-text'>Compact</span></a>`);
             $("a#toggle-compact-mode").click(function() {
                 compactMode = !compactMode;
                 self.setCompactMode(compactMode);
             });
 
-            $("div.header-user").prepend(`<a id='trigger-refresh' class='header-btn compact-mode-disabled'>
-                                                <span class='header-btn-text'>Refresh UI</span></a>`);
-            $("a#trigger-refresh").click(function() {
-                self.setupBoard();
+            $("div.header-user").prepend(`<a id='toggle-disable-cover-mode' class='header-btn compact-mode-disabled'>
+                                                <span class='header-btn-text'>Covers</span></a>`);
+            $("a#toggle-disable-cover-mode").click(function() {
+                disableCoverMode = !disableCoverMode;
+                self.setDisableCoverMode(disableCoverMode);
             });
         },
 
@@ -438,7 +449,21 @@ const tfolds = (function (factory) {
             $("div.list-wrapper:not(:has(>div.list-collapsed:visible)):not(:has(>div.super-list-collapsed:visible))").css("width", `${self.listWidth}px`);
             $("div.super-list:not(:has(>div.super-list-collapsed:visible))").css("width", `${self.listWidth*2-8}px`);
             self.storeGlobalBoardSetting("compactMode", enabled);
-    },
+        },
+
+        setDisableCoverMode(enabled) {
+            let $btn = $("a#toggle-disable-cover-mode");
+            if (enabled) {
+                $btn.addClass("compact-mode-disabled");
+                $btn.removeClass("compact-mode-enabled");
+                $('#board').addClass("no-covers");
+            } else {
+                $btn.addClass("compact-mode-enabled");
+                $btn.removeClass("compact-mode-disabled");
+                $('#board').removeClass("no-covers");
+            }
+            self.storeGlobalBoardSetting("disableCoverMode", enabled);
+        },
 
         /**
          *
@@ -1190,7 +1215,6 @@ const tfolds = (function (factory) {
          *
          */
         toggleSection(section) {
-            console.log(section);
             let $s = $(section);
             $s.toggleClass("icon-collapsed icon-expanded");
             let $cards = $s.closest("a").nextUntil(`a:contains('${self.sectionIdentifier}'),div.card-composer`);

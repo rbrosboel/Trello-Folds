@@ -184,3 +184,10 @@ span#section-title {
 .header-btn.compact-mode-disabled:hover {
     /* background-color: #862e28; */
 }
+
+#board.no-covers .list-card .list-card-cover {
+    display: none;
+}
+#board.no-covers .list-card:first-child .list-card-cover {
+    display: block;
+}
