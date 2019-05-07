@@ -76,6 +76,7 @@ const tdom = (function (factory) {
     EventHandler.LIST_DRAGGED = Symbol("list_dragged");
     EventHandler.LIST_DROPPED = Symbol("list_dropped");
     EventHandler.BADGES_MODIFIED = Symbol("badges_modified");
+    EventHandler.MEMBERS_MODIFIED = Symbol("members_modified");
 
     Object.freeze(EventHandler);
 
@@ -269,7 +270,13 @@ const tdom = (function (factory) {
             let listObserver = new MutationObserver(function (mutations) {
                 mutations.forEach((m) => {
                     // console.dir(m);
-                    if (m.addedNodes.length === 1 &&
+                    if (m.removedNodes.length === 1 &&
+                        $(m.removedNodes[0]).hasClass('member')) {
+                        handler.emit(EventHandler.MEMBERS_MODIFIED, $(m.target).closest("a")[0]);
+                    } else if (m.addedNodes.length === 1 &&
+                        $(m.addedNodes[0]).hasClass('member')) {
+                        handler.emit(EventHandler.MEMBERS_MODIFIED, $(m.target).closest("a")[0]);
+                    } else if (m.addedNodes.length === 1 &&
                         $(m.target).hasClass("custom-field-front-badges")) {
                             handler.emit(EventHandler.BADGES_MODIFIED, $(m.target).closest("a")[0]);
                     } else if (m.addedNodes.length > 0 &&
@@ -355,6 +362,10 @@ const tdom = (function (factory) {
          */
         onListDropped(callback) {
             handler.addListener(EventHandler.LIST_DROPPED, callback);
+        },
+
+        onMembersModified(callback) {
+            handler.addListener(EventHandler.MEMBERS_MODIFIED, callback);
         },
 
         /**
