@@ -118,6 +118,7 @@ const tfolds = (function (factory) {
             tdom.onBoardChanged(self.boardChanged);
             tdom.onListModified(self.listModified);
             tdom.onListAdded(self.listAdded);
+            tdom.onMembersModified(self.membersModified)
             tdom.onCardAdded(self.cardAdded);
             tdom.onCardModified(self.cardModified);
             tdom.onListTitleModified(self.listTitleModified);
@@ -186,6 +187,11 @@ const tfolds = (function (factory) {
 
         listDropped() {
             self.combineLists();
+        },
+
+        membersModified(cardEl) {
+            const list = tdom.getContainingList(cardEl)
+            self.showSectionCount(list);
         },
 
         /**
@@ -1079,9 +1085,10 @@ const tfolds = (function (factory) {
             requestAnimationFrame(() => {
                 let $sections = tdom.getCardsInList(listEl, self.sectionIdentifier);
                 $sections.map((i, section) => {
-                    let $section = $(section)
-                    let $cards = $section.closest("a").nextUntil(`a:contains('${self.sectionIdentifier}'),div.card-composer`).not('.placeholder');
-                    $section.find('.section-count-badge').text($cards.length)
+                    let $section = $(section);
+                    let $cards = $section.closest("a").nextUntil(`a:contains('${self.sectionIdentifier}'),div.card-composer`).not('.placeholder, .hide');
+                    let $ownCards = $cards.has(`.member[data-idmem=${tdom.member}]`);
+                    $section.find('.section-count-badge').html('<b>' + $ownCards.length + '</b>&nbsp;&nbsp;/&nbsp;&nbsp;' + $cards.length);
                 });
             });
         },
