@@ -1144,11 +1144,12 @@ const tfolds = (function (factory) {
             }
 
             const $icon = $('<span class="icon-expanded"/>');
-            $icon.click(function () {
+            $icon.click(function (e) {
                 tfolds.toggleSection(this);
+                e.preventDefault();
                 return false;
             });
-            $icon.contextmenu(function () {
+            $icon.contextmenu(function (e) {
                 let collapse = $(this).hasClass("icon-expanded")
                 let $sections = tdom.getCardsByName(tdom.getCardName($card));
                 $sections.each((i, section) => {
@@ -1157,6 +1158,7 @@ const tfolds = (function (factory) {
                         tfolds.toggleSection($icon.get(0));
                     }
                 })
+                e.preventDefault();
                 return false;
             });
             const strippedTitle = self.getStrippedTitle(tdom.getCardName($card));
