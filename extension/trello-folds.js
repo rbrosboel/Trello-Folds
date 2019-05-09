@@ -1113,8 +1113,9 @@ const tfolds = (function (factory) {
                     let $section = $(section);
                     let $cards = $section.closest("a").nextUntil(`a:contains('${self.sectionIdentifier}'),div.card-composer`).not('.placeholder');
                     let member = tdom.member;
-                    let ownCards = member ? $cards.has(`.member[data-idmem=${member}]`).length : '?';
-                    $section.find('.section-count-badge').html('<b>' + ownCards + '</b>&nbsp;&nbsp;/&nbsp;&nbsp;' + $cards.length);
+                    let ownCards = member ? $cards.has(`.member[data-idmem=${member}]`).length : 0;
+                    let count = ownCards ? `${ownCards}&nbsp;&nbsp;/&nbsp;&nbsp;${$cards.length}` : $cards.length
+                    $section.find('.section-count-badge').html(count);
                 });
             });
         },
