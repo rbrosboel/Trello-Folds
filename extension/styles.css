@@ -49,6 +49,10 @@
     padding: 0px;
     margin: 0px;
 }
+.comment-card {
+    display: block !important;
+    height: initial !important;
+}
 
 .super-list-collapsed,
 .list-collapsed {
