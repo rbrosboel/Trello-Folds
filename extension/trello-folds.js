@@ -1087,8 +1087,9 @@ const tfolds = (function (factory) {
                 $sections.map((i, section) => {
                     let $section = $(section);
                     let $cards = $section.closest("a").nextUntil(`a:contains('${self.sectionIdentifier}'),div.card-composer`).not('.placeholder');
-                    let $ownCards = $cards.has(`.member[data-idmem=${tdom.member}]`);
-                    $section.find('.section-count-badge').html('<b>' + $ownCards.length + '</b>&nbsp;&nbsp;/&nbsp;&nbsp;' + $cards.length);
+                    let member = tdom.member;
+                    let ownCards = member ? $cards.has(`.member[data-idmem=${member}]`).length : '?';
+                    $section.find('.section-count-badge').html('<b>' + ownCards + '</b>&nbsp;&nbsp;/&nbsp;&nbsp;' + $cards.length);
                 });
             });
         },
