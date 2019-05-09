@@ -85,7 +85,6 @@ const tdom = (function (factory) {
     let handler = new EventHandler();
     let currentBoardId;
     let debug = false;
-    let member = null;
 
     //#endregion PRIVATE MEMBERS
 
@@ -104,7 +103,7 @@ const tdom = (function (factory) {
         },
 
         get member() {
-            return member;
+            return $('#header .member span[id$=-avatar]')[0].id.split('-')[0];
         },
 
         /**
@@ -138,8 +137,6 @@ const tdom = (function (factory) {
                 }
                 throw ReferenceError(`DIV#content not found after ${attemptCount} attempts`);
             }
-
-            member = $('#header .member span[id$=-avatar]')[0].id.split('-')[0];
 
             // TODO Rename
             let initObserver = new MutationObserver(function (mutations) {
