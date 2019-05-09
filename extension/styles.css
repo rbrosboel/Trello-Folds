@@ -173,10 +173,10 @@ span#section-title {
     top: 5px;
 }
 
-.list-card:not(.section-card):first-child .list-card-cover {
+.list-card.is-covered:first-child .list-card-cover {
     height: 150px !important;
 }
-.list-card:not(.section-card):first-child .list-card-details {
+.list-card.is-covered:first-child .list-card-details {
     min-height: 75px;
 }
 
