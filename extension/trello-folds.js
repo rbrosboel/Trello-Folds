@@ -132,6 +132,10 @@ const tfolds = (function (factory) {
              */
             config.expandedIconUrl = chrome.runtime.getURL('img/icons8-sort-down-16.png');
             config.collapsedIconUrl = chrome.runtime.getURL('img/icons8-sort-right-16.png');
+
+            self.chromeStorageSyncSet = tdom.debounce((storage, cb) => {
+                chrome.storage.sync.set(storage, cb);
+            }, 100);
         },
 
         //#region EVENT HANDLERS
@@ -563,7 +567,7 @@ const tfolds = (function (factory) {
             storage[listName] = setting;
             let boardStorage = {};
             boardStorage[boardId] = storage;
-            chrome.storage.sync.set(boardStorage, () => {
+            self.chromeStorageSyncSet(boardStorage, () => {
                 if (chrome.runtime.lastError) {
                     console.error(chrome.runtime.lastError);
                 }
