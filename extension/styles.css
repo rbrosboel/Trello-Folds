@@ -184,6 +184,10 @@ span#section-title {
     background-color: #ffffc0;
 }
 
+.header-btn {
+    text-align: center;
+}
+
 .header-btn.compact-mode-enabled {
     background-color: #539744;
 }

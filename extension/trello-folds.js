@@ -440,6 +440,27 @@ const tfolds = (function (factory) {
                 disableCoverMode = !disableCoverMode;
                 self.setDisableCoverMode(disableCoverMode);
             });
+
+            $("div.header-user").prepend(`<a id='trigger-expand' class='header-btn'>
+                                                <span class='header-btn-text'>+</span></a>`);
+            $("a#trigger-expand").click(function() {
+                let $sections = tdom.getCardsByName(self.sectionIdentifier, false);
+                $sections.each((i, section) => {
+                    let $icon = $(section).find(".icon-collapsed")
+                    $icon.length && tfolds.toggleSection($icon.get(0));
+                })
+            });
+
+            $("div.header-user").prepend(`<a id='trigger-collapse' class='header-btn'>
+                                                <span class='header-btn-text'>-</span></a>`);
+            $("a#trigger-collapse").click(function() {
+                let $sections = tdom.getCardsByName(self.sectionIdentifier, false);
+                $sections = $sections.not()
+                $sections.each((i, section) => {
+                    let $icon = $(section).find(".icon-expanded")
+                    $icon.length && tfolds.toggleSection($icon.get(0));
+                })
+            });
         },
 
         /**
