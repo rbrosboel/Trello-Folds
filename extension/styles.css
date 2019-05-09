@@ -131,6 +131,8 @@
 }
 
 .section-count-badge {
+    position: absolute !important;
+    right: 5px;
     padding: 1px;
     padding-left: 5px;
     padding-right: 5px;
