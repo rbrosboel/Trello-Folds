@@ -103,7 +103,10 @@ const tdom = (function (factory) {
         },
 
         get member() {
-            return $('#header .member span[id$=-avatar]')[0].id.split('-')[0];
+            const $member = $('#header .member span[id$=-avatar]');
+            const member = $member.length && $member[0];
+            const id = member && member.id;
+            return id.split('-')[0];
         },
 
         /**
