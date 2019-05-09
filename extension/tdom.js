@@ -109,6 +109,10 @@ const tdom = (function (factory) {
             return id.split('-')[0];
         },
 
+        get debounce() {
+            return debounce;
+        },
+
         /**
          *
          */
