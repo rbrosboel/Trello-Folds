@@ -106,7 +106,8 @@ const tdom = (function (factory) {
             const $member = $('#header .member span[id$=-avatar]');
             const member = $member.length && $member[0];
             const id = member && member.id;
-            return id.split('-')[0];
+            const parts = id.split ? id.split('-') : [];
+            return parts.length && parts[0];
         },
 
         get debounce() {
