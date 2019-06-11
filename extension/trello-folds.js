@@ -421,27 +421,30 @@ const tfolds = (function (factory) {
                 return;
             }
 
-            $("div.header-user").prepend(`<a id='trigger-refresh' class='header-btn'>
+            // let $header = $("div.header-user");
+            let $header = $("#header > div:last-child");
+
+            $header.prepend(`<a id='trigger-refresh' class='header-btn'>
                                                 <span class='header-btn-text'>Refresh UI</span></a>`);
             $("a#trigger-refresh").click(function() {
                 self.setupBoard();
             });
 
-            $("div.header-user").prepend(`<a id='toggle-compact-mode' class='header-btn compact-mode-disabled'>
+            $header.prepend(`<a id='toggle-compact-mode' class='header-btn compact-mode-disabled'>
                                                 <span class='header-btn-text'>Compact</span></a>`);
             $("a#toggle-compact-mode").click(function() {
                 compactMode = !compactMode;
                 self.setCompactMode(compactMode);
             });
 
-            $("div.header-user").prepend(`<a id='toggle-disable-cover-mode' class='header-btn compact-mode-disabled'>
+            $header.prepend(`<a id='toggle-disable-cover-mode' class='header-btn compact-mode-disabled'>
                                                 <span class='header-btn-text'>Covers</span></a>`);
             $("a#toggle-disable-cover-mode").click(function() {
                 disableCoverMode = !disableCoverMode;
                 self.setDisableCoverMode(disableCoverMode);
             });
 
-            $("div.header-user").prepend(`<a id='trigger-expand' class='header-btn'>
+            $header.prepend(`<a id='trigger-expand' class='header-btn'>
                                                 <span class='header-btn-text'>+</span></a>`);
             $("a#trigger-expand").click(function() {
                 let $sections = tdom.getCardsByName(self.sectionIdentifier, false);
@@ -451,7 +454,7 @@ const tfolds = (function (factory) {
                 })
             });
 
-            $("div.header-user").prepend(`<a id='trigger-collapse' class='header-btn'>
+            $header.prepend(`<a id='trigger-collapse' class='header-btn'>
                                                 <span class='header-btn-text'>-</span></a>`);
             $("a#trigger-collapse").click(function() {
                 let $sections = tdom.getCardsByName(self.sectionIdentifier, false);
