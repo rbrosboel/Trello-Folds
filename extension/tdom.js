@@ -103,11 +103,11 @@ const tdom = (function (factory) {
         },
 
         get member() {
-            const $member = $('#header .member span[id$=-avatar]');
+            const $member = $('#header button[data-test-id="header-member-menu-button"] > div > span');
             const member = $member.length && $member[0];
-            const id = member && member.id;
-            const parts = id.split ? id.split('-') : [];
-            return parts.length && parts[0];
+            const style = member && member.style;
+            const match = style && style.backgroundImage.match(/[a-z0-9]{32}/);
+            return match && match[0];
         },
 
         get debounce() {
