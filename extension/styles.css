@@ -176,6 +176,10 @@ span#section-title {
     top: 5px;
 }
 
+.list-card.is-covered:first-child {
+    display: block;
+    height: auto !important;
+}
 .list-card.is-covered:first-child .list-card-cover {
     height: 150px !important;
 }
