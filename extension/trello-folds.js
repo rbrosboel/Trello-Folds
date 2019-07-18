@@ -424,12 +424,6 @@ const tfolds = (function (factory) {
             // let $header = $("div.header-user");
             let $header = $("#header > div:last-child");
 
-            $header.prepend(`<a id='trigger-refresh' class='header-btn'>
-                                                <span class='header-btn-text'>Refresh UI</span></a>`);
-            $("a#trigger-refresh").click(function() {
-                self.setupBoard();
-            });
-
             $header.prepend(`<a id='toggle-compact-mode' class='header-btn compact-mode-disabled'>
                                                 <span class='header-btn-text'>Compact</span></a>`);
             $("a#toggle-compact-mode").click(function() {
