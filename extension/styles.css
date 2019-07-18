@@ -1,3 +1,7 @@
+.list-card {
+    max-width: 100% !important;
+}
+
 .section {
     background: rgba(0,0,0,0.0);
     border: none;
@@ -219,4 +223,13 @@ span#section-title {
 }
 .no-covers .ui-sortable-helper .list-card-cover {
     display: none;
+}
+
+.clean .list-card-labels,
+.clean .list-card .badges,
+.clean .list-card-members {
+    display: none;
+}
+.clean .list-card {
+    margin-bottom: 3px;
 }

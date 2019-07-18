@@ -336,7 +336,7 @@ const tdom = (function (factory) {
          *
          */
         onBoardChanged(callback) {
-            handler.addListener(EventHandler.BOARD_CHANGED, debounce(callback, 100));
+            handler.addListener(EventHandler.BOARD_CHANGED, debounce(callback, 250));
         },
 
         /**

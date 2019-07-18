@@ -29,6 +29,7 @@ const tfolds = (function (factory) {
 
     let compactMode = false;
     let disableCoverMode = true;
+    let cleanMode = false;
 
     let storage = {};
     let boardId;
@@ -411,6 +412,9 @@ const tfolds = (function (factory) {
 
             disableCoverMode = self.retrieveGlobalBoardSetting("disableCoverMode");
             self.setDisableCoverMode(disableCoverMode);
+
+            cleanMode = self.retrieveGlobalBoardSetting("cleanMode");
+            self.setCleanMode(cleanMode);
         },
 
         /**
@@ -424,13 +428,6 @@ const tfolds = (function (factory) {
             // let $header = $("div.header-user");
             let $header = $("#header > div:last-child");
 
-            $header.prepend(`<a id='toggle-compact-mode' class='header-btn compact-mode-disabled'>
-                                                <span class='header-btn-text'>Compact</span></a>`);
-            $("a#toggle-compact-mode").click(function() {
-                compactMode = !compactMode;
-                self.setCompactMode(compactMode);
-            });
-
             $header.prepend(`<a id='toggle-disable-cover-mode' class='header-btn compact-mode-disabled'>
                                                 <span class='header-btn-text'>Covers</span></a>`);
             $("a#toggle-disable-cover-mode").click(function() {
@@ -438,17 +435,35 @@ const tfolds = (function (factory) {
                 self.setDisableCoverMode(disableCoverMode);
             });
 
+            $header.prepend(`<a id='toggle-compact-mode' class='header-btn compact-mode-disabled'>
+                                                <span class='header-btn-text'>Compact</span></a>`);
+            $("a#toggle-compact-mode").click(function() {
+                compactMode = !compactMode;
+                self.setCompactMode(compactMode);
+            });
+
+            $header.prepend(`<a id='toggle-clean-mode' class='header-btn compact-mode-disabled'>
+                                                <span class='header-btn-text'>Clean</span></a>`);
+            $("a#toggle-clean-mode").click(function() {
+                cleanMode = !cleanMode;
+                self.setCleanMode(cleanMode);
+            });
+
+            $header.prepend('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;');
+
+            $header.prepend(`<a id='trigger-collapse' class='header-btn'>
+                                                <span class='header-btn-text'>None</span></a>`);
+            $("a#trigger-collapse").click(function() {
+                self.showSections([]);
+            });
+
             $header.prepend(`<a id='trigger-expand' class='header-btn'>
-                                                <span class='header-btn-text'>+</span></a>`);
+                                                <span class='header-btn-text'>All</span></a>`);
             $("a#trigger-expand").click(function() {
                 self.showSections(['']);
             });
 
-            $header.prepend(`<a id='trigger-collapse' class='header-btn'>
-                                                <span class='header-btn-text'>-</span></a>`);
-            $("a#trigger-collapse").click(function() {
-                self.showSections([]);
-            });
+            $header.prepend('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;');
 
             $header.prepend(`<a id='trigger-backlog' class='header-btn'>
                                                 <span class='header-btn-text'>Backlog</span></a>`);
@@ -506,6 +521,20 @@ const tfolds = (function (factory) {
                 $('body').removeClass("no-covers");
             }
             self.storeGlobalBoardSetting("disableCoverMode", enabled);
+        },
+
+        setCleanMode(enabled) {
+            let $btn = $("a#toggle-clean-mode");
+            if (enabled) {
+                $btn.addClass("compact-mode-enabled");
+                $btn.removeClass("compact-mode-disabled");
+                $('body').addClass("clean");
+            } else {
+                $btn.addClass("compact-mode-disabled");
+                $btn.removeClass("compact-mode-enabled");
+                $('body').removeClass("clean");
+            }
+            self.storeGlobalBoardSetting("cleanMode", enabled);
         },
 
         /**
