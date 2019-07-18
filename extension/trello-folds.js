@@ -533,11 +533,11 @@ const tfolds = (function (factory) {
             if (enabled) {
                 $btn.addClass("compact-mode-disabled");
                 $btn.removeClass("compact-mode-enabled");
-                $('#board').addClass("no-covers");
+                $('body').addClass("no-covers");
             } else {
                 $btn.addClass("compact-mode-enabled");
                 $btn.removeClass("compact-mode-disabled");
-                $('#board').removeClass("no-covers");
+                $('body').removeClass("no-covers");
             }
             self.storeGlobalBoardSetting("disableCoverMode", enabled);
         },
