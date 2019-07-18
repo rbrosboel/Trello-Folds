@@ -441,71 +441,37 @@ const tfolds = (function (factory) {
             $header.prepend(`<a id='trigger-expand' class='header-btn'>
                                                 <span class='header-btn-text'>+</span></a>`);
             $("a#trigger-expand").click(function() {
-                let $sections = tdom.getCardsByName(self.sectionIdentifier, false);
-                $sections.each((i, section) => {
-                    let $icon = $(section).find(".icon-collapsed")
-                    $icon.length && tfolds.toggleSection($icon.get(0));
-                })
+                self.showSections(['']);
             });
 
             $header.prepend(`<a id='trigger-collapse' class='header-btn'>
                                                 <span class='header-btn-text'>-</span></a>`);
             $("a#trigger-collapse").click(function() {
-                let $sections = tdom.getCardsByName(self.sectionIdentifier, false);
-                $sections = $sections.not()
-                $sections.each((i, section) => {
-                    let $icon = $(section).find(".icon-expanded")
-                    $icon.length && tfolds.toggleSection($icon.get(0));
-                })
+                self.showSections([]);
             });
 
             $header.prepend(`<a id='trigger-backlog' class='header-btn'>
                                                 <span class='header-btn-text'>Backlog</span></a>`);
             $("a#trigger-backlog").click(function() {
-                let $sections = tdom.getCardsByName(self.sectionIdentifier, false);
-                $sections = $sections.not()
-                $sections.each((i, section) => {
-                    let $icon = $(section).find(".icon-expanded")
-                    $icon.length && tfolds.toggleSection($icon.get(0));
-                });
-
-                self.toggleSections(['BACKLOG']);
+                self.showSections(['BACKLOG']);
             });
 
             $header.prepend(`<a id='trigger-done' class='header-btn'>
                                                 <span class='header-btn-text'>Done</span></a>`);
             $("a#trigger-done").click(function() {
-                let $sections = tdom.getCardsByName(self.sectionIdentifier, false);
-                $sections.each((i, section) => {
-                    let $icon = $(section).find(".icon-expanded")
-                    $icon.length && tfolds.toggleSection($icon.get(0));
-                });
-
-                self.toggleSections(['DONE']);
+                self.showSections(['DONE']);
             });
 
             $header.prepend(`<a id='trigger-progress' class='header-btn'>
                                                 <span class='header-btn-text'>Progress</span></a>`);
             $("a#trigger-progress").click(function() {
-                let $sections = tdom.getCardsByName(self.sectionIdentifier, false);
-                $sections.each((i, section) => {
-                    let $icon = $(section).find(".icon-expanded")
-                    $icon.length && tfolds.toggleSection($icon.get(0));
-                });
-
-                self.toggleSections(['PROGRESS', 'REVIEW', 'APPROVED']);
+                self.showSections(['PROGRESS', 'REVIEW', 'APPROVED']);
             });
 
             $header.prepend(`<a id='trigger-todo' class='header-btn'>
                                                 <span class='header-btn-text'>Todo</span></a>`);
             $("a#trigger-todo").click(function() {
-                let $sections = tdom.getCardsByName(self.sectionIdentifier, false);
-                $sections.each((i, section) => {
-                    let $icon = $(section).find(".icon-expanded")
-                    $icon.length && tfolds.toggleSection($icon.get(0));
-                });
-
-                self.toggleSections(['TODO', 'PROGRESS', 'REVIEW', 'APPROVED']);
+                self.showSections(['TODO', 'PROGRESS', 'REVIEW', 'APPROVED']);
             });
         },
 
@@ -1318,7 +1284,21 @@ const tfolds = (function (factory) {
             self.store(tdom.getListName($l), "sections", listSections);
         },
 
-        toggleSections(sections) {
+        showSections(sections) {
+            // Expand all
+            let $sections = tdom.getCardsByName(self.sectionIdentifier, false);
+            $sections.each((i, section) => {
+                let $icon = $(section).find(".icon-collapsed")
+                $icon.length && tfolds.toggleSection($icon.get(0));
+            });
+
+            // Collapse all
+            $sections = tdom.getCardsByName(self.sectionIdentifier, false);
+            $sections.each((i, section) => {
+                let $icon = $(section).find(".icon-expanded")
+                $icon.length && tfolds.toggleSection($icon.get(0));
+            });
+
             for (let i = 0; i < sections.length; i++) {
                 let sectionName = sections[i];
                 let cardName = self.sectionIdentifier + " " + sectionName;
