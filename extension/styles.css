@@ -243,3 +243,10 @@ span#section-title {
 .clean .list-card {
     margin-bottom: 3px;
 }
+
+
+.pop-over-list .js-add-card,
+.pop-over-list .js-sort-cards
+{
+    display: none;
+}
