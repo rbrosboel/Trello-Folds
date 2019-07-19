@@ -183,11 +183,21 @@ span#section-title {
 .list-card.is-covered:first-child {
     display: block;
     height: auto !important;
+
+    position: sticky;
+    top: 0;
+    border-radius: 0;
+    padding-bottom: 1em;
+    box-shadow: none;
+    background: #e0e1e6;
+    z-index: 9;
 }
 .list-card.is-covered:first-child .list-card-cover {
-    height: 150px !important;
+    height: 75px !important;
+    border-radius: 3px;
 }
 .list-card.is-covered:first-child .list-card-details {
+    display: none;
     min-height: 75px;
 }
 
