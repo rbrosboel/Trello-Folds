@@ -427,6 +427,8 @@ const tfolds = (function (factory) {
 
             // let $header = $("div.header-user");
             let $header = $("#header > div:last-child");
+            
+            $header.prepend('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;');
 
             $header.prepend(`<a id='toggle-disable-cover-mode' class='header-btn compact-mode-disabled'>
                                                 <span class='header-btn-text'>Covers</span></a>`);

@@ -235,18 +235,51 @@ span#section-title {
     display: none;
 }
 
-.clean .list-card-labels,
-.clean .list-card .badges,
-.clean .list-card-members {
-    display: none;
-}
 .clean .list-card {
     margin-bottom: 3px;
+}
+.clean .list-card-details {
+    display: flex;
+    align-items: center;
+}
+.clean .list-card .list-card-details .badges,
+.clean .list-card .list-card-details .list-card-members {
+    display: none;
+}
+.clean .list-card .list-card-details .list-card-title {
+    flex: 1;
+}
+.clean .list-card .list-card-details .list-card-labels {
+    order: 1;
+    display: flex;
+    flex-shrink: 0;
+}
+.clean .list-card .list-card-details .list-card-members {
+    order: 2;
+}
+.clean .list-card .list-card-details .badges,
+.clean .list-card .list-card-details .list-card-labels .card-label .label-text {
+    display: none;
+}
+.clean .list-card .list-card-details .list-card-labels .card-label {
+    height: 8px !important;
+    width: 8px !important;
+    min-width: auto;
+    padding: 0 !important;
+    margin: 0 0 4px 4px;
+}
+
+.list-card .icon-edit {
+    display: none;
 }
 
 
 .pop-over-list .js-add-card,
 .pop-over-list .js-sort-cards
 {
+    display: none;
+}
+
+#header > a[href="/"] {
     display: none;
 }
