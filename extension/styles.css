@@ -242,9 +242,17 @@ span#section-title {
     display: flex;
     align-items: center;
 }
-.clean .list-card .list-card-details .badges,
-.clean .list-card .list-card-details .list-card-members {
+.clean .list-card .list-card-details .badges .badge,
+.clean .list-card .list-card-details .list-card-members,
+.clean .list-card .list-card-details .list-card-labels .card-label .label-text {
     display: none;
+}
+.clean .list-card .list-card-details .badges .js-badges {
+    display: flex;
+}
+.clean .list-card .list-card-details .badge.js-due-date-badge,
+.clean .list-card .list-card-details .badge.is-unread-notification {
+    display: block;
 }
 .clean .list-card .list-card-details .list-card-title {
     flex: 1;
@@ -256,10 +264,6 @@ span#section-title {
 }
 .clean .list-card .list-card-details .list-card-members {
     order: 2;
-}
-.clean .list-card .list-card-details .badges,
-.clean .list-card .list-card-details .list-card-labels .card-label .label-text {
-    display: none;
 }
 .clean .list-card .list-card-details .list-card-labels .card-label {
     height: 8px !important;
