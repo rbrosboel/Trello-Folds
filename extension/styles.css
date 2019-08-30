@@ -242,6 +242,9 @@ span#section-title {
     display: flex;
     align-items: center;
 }
+.clean .list-card .list-card-details .badges {
+    margin: 0;
+}
 .clean .list-card .list-card-details .badges .badge,
 .clean .list-card .list-card-details .list-card-members,
 .clean .list-card .list-card-details .list-card-labels .card-label .label-text {
